@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Room Booking</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    
+
+    <!-- Optional Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Hotel Name</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/room_booking.html"
+                >Room Booking</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/check_in_out.html"
+                >Check In/Out</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/admin_dashboard.html"
+                >Admin Dashboard</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Room Booking Page -->
+    <div class="container my-4">
+      <h2>Room Booking</h2>
+
+      <div class="row">
+        <!-- Booking Form -->
+        <div class="col-lg-6">
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Enter name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="contact" class="form-label">Contact No.</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contact"
+                placeholder="Enter contact no."
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Enter email"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="roomType" class="form-label">Room Type</label>
+              <select class="form-select" id="roomType">
+                <option value="Standard">Standard</option>
+                <option value="Deluxe">Deluxe</option>
+                <option value="Suite">Suite</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="dateFrom" class="form-label">Date From</label>
+              <input type="date" class="form-control" id="dateFrom" />
+            </div>
+            <div class="mb-3">
+              <label for="dateTo" class="form-label">Date To</label>
+              <input type="date" class="form-control" id="dateTo" />
+            </div>
+            <div class="mb-3">
+              <label for="preferences" class="form-label"
+                >Preferences (Optional)</label
+              >
+              <textarea
+                class="form-control"
+                id="preferences"
+                placeholder="Any special requests"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+
+        <!-- Room Charges -->
+        <div class="col-lg-6">
+          <h4>Room Charges</h4>
+          <div>
+            <label
+              >Standard: $<span id="standardChargeDisplay">100</span></label
+            >
+          </div>
+          <div>
+            <label>Deluxe: $<span id="deluxeChargeDisplay">150</span></label>
+          </div>
+          <div>
+            <label>Suite: $<span id="suiteChargeDisplay">200</span></label>
+          </div>
+        </div>
+        <!-- <div class="col-lg-6">
+      <h5>Room Charges / Day</h5>
+      <ul>
+        <li>Standard: $100</li>
+        <li>Deluxe: $150</li>
+        <li>Suite: $200</li>
+      </ul>
+    </div> -->
+      </div>
+    </div>
+    <!-- JavaScript to Sync Room Charges -->
+<script>
+  
+  // Load room charges from localStorage on Room Booking page
+  window.addEventListener('load', () => {
+    const standardCharge = localStorage.getItem('standardCharge');
+    const deluxeCharge = localStorage.getItem('deluxeCharge');
+    const suiteCharge = localStorage.getItem('suiteCharge');
+
+    // Update the room charges displayed on the Room Booking page
+    if (standardCharge) document.getElementById('standardChargeDisplay').innerText = standardCharge;
+    if (deluxeCharge) document.getElementById('deluxeChargeDisplay').innerText = deluxeCharge;
+    if (suiteCharge) document.getElementById('suiteChargeDisplay').innerText = suiteCharge;
+  });
+</script>
+  </body>
+</html>

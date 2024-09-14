@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    
+
+    <!-- Optional Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="/CSS/admin.css">
+
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Hotel Name</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/room_booking.html">Room Booking</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/check_in_out.html">Check In/Out</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/admin_dashboard.html">Admin Dashboard</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+<div class="container my-4">
+  <h2>Admin Dashboard</h2>
+
+  <!-- Room Management -->
+  <div class="mb-4">
+    <h4>Room Management</h4>
+    <div class="d-flex align-items-center">
+      <h5>Total Rooms: 75 (15 rooms per floor, 5 floors)</h5>
+    </div>
+  </div>
+
+  <!-- Room Grid (15x5) -->
+  <div class="room-grid">
+    <!-- Room Grid Dynamically Generated Below -->
+  </div>
+
+  <!-- Editable Room Charges -->
+  <div class="my-4">
+    <h4>Room Charges</h4>
+    <div>
+      <label>Standard: $<input type="number" id="standardCharge" value="100" class="form-control d-inline w-auto" disabled> 
+        <button class="btn btn-sm btn-link edit-charge" data-roomtype="standard">Edit</button>
+      </label>
+    </div>
+    <div>
+      <label>Deluxe: $<input type="number" id="deluxeCharge" value="150" class="form-control d-inline w-auto" disabled> 
+        <button class="btn btn-sm btn-link edit-charge" data-roomtype="deluxe">Edit</button>
+      </label>
+    </div>
+    <div>
+      <label>Suite: $<input type="number" id="suiteCharge" value="200" class="form-control d-inline w-auto" disabled> 
+        <button class="btn btn-sm btn-link edit-charge" data-roomtype="suite">Edit</button>
+      </label>
+    </div>
+  </div>
+
+  <!-- Booking Management -->
+  <div class="my-4">
+    <h4>Manage Bookings</h4>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Room No.</th>
+          <th>Name</th>
+          <th>Check-in Date</th>
+          <th>Check-out Date</th>
+          <th>Preferences</th>
+          <th>Edit</th>
+          <th>Cancel</th>
+          <th>View</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>001</td>
+          <td>101</td>
+          <td>John Doe</td>
+          <td>2024-09-15</td>
+          <td>2024-09-18</td>
+          <td>No preferences</td>
+          <td><button class="btn btn-primary btn-sm">Edit</button></td>
+          <td><button class="btn btn-danger btn-sm">Cancel</button></td>
+          <td><button class="btn btn-info btn-sm">View</button></td>
+        </tr>
+        <!-- More rows -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- JavaScript for Room Grid and Editable Charges -->
+<script>
+  
+  // Generate Room Grid
+  const roomGrid = document.querySelector('.room-grid');
+  const floors = 5;
+  const roomsPerFloor = 15;
+
+  for (let floor = 0; floor < floors; floor++) {
+    for (let room = 1; room <= roomsPerFloor; room++) {
+      let roomNumber = `${floor}${room < 10 ? '0' : ''}${room}`; // Format as 001, 002, ..., 015, 101, 102, ..., 115
+      let roomBox = document.createElement('div');
+      roomBox.classList.add('room-box');
+      roomBox.innerText = roomNumber;
+      roomBox.onclick = () => toggleRoomColor(roomBox);
+      roomGrid.appendChild(roomBox);
+    }
+  }
+
+  // Function to toggle room color
+  function toggleRoomColor(box) {
+    if (box.style.backgroundColor === 'white') {
+      box.style.backgroundColor = 'green'; // Occupied
+    } else if (box.style.backgroundColor === 'green') {
+      box.style.backgroundColor = 'red'; // Maintenance
+    } else if (box.style.backgroundColor === 'red') {
+      box.style.backgroundColor = 'yellow'; // Reserved
+    } else {
+      box.style.backgroundColor = 'white'; // Free
+    }
+  }
+
+  // Editable Room Charges and Sync with Room Booking Page
+  document.querySelectorAll('.edit-charge').forEach(button => {
+    button.addEventListener('click', function() {
+      const roomType = this.dataset.roomtype;
+      const inputField = document.getElementById(`${roomType}Charge`);
+      
+      if (inputField.disabled) {
+        inputField.disabled = false;
+        inputField.focus();
+        this.innerText = 'Save';
+      } else {
+        inputField.disabled = true;
+        this.innerText = 'Edit';
+        
+        // Store updated charges in localStorage
+        localStorage.setItem(`${roomType}Charge`, inputField.value);
+      }
+    });
+  });
+
+  // Load room charges from localStorage (if available)
+  window.addEventListener('load', () => {
+    const standardCharge = localStorage.getItem('standardCharge');
+    const deluxeCharge = localStorage.getItem('deluxeCharge');
+    const suiteCharge = localStorage.getItem('suiteCharge');
+    
+    if (standardCharge) document.getElementById('standardCharge').value = standardCharge;
+    if (deluxeCharge) document.getElementById('deluxeCharge').value = deluxeCharge;
+    if (suiteCharge) document.getElementById('suiteCharge').value = suiteCharge;
+  });
+</script>
+    
+  </body>
+</html>

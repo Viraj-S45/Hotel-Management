@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Check In/Out</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    
+    <!-- Optional Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Hotel Name</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/room_booking.html"
+                >Room Booking</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/check_in_out.html"
+                >Check In/Out</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/HTML/admin_dashboard.html">Admin Dashboard</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Check-in/Check-out Page -->
+    <div class="container my-4">
+      <h2>Check In/Out</h2>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Room No.</th>
+            <th>Name</th>
+            <th>Check-in Date</th>
+            <th>Check-out Date</th>
+            <th>Preferences</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td>
+            <td>101</td>
+            <td>John Doe</td>
+            <td>2024-09-15</td>
+            <td>2024-09-18</td>
+            <td>No preferences</td>
+            <td><button class="btn btn-success">Check In</button></td>
+            <td><button class="btn btn-danger">Check Out</button></td>
+          </tr>
+          <!-- More rows -->
+        </tbody>
+      </table>
+    </div>
+    
+
+  </body>
+</html>

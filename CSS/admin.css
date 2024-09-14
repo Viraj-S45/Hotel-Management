@@ -1,0 +1,21 @@
+.room-grid {
+      display: grid;
+      grid-template-columns: repeat(15, 1fr);
+      gap: 5px;
+    }
+
+    .room-box {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+      cursor: pointer;
+      background-color: white; /* Default color is white */
+    }
+
+    .edit-mode {
+      border: 2px dashed #007bff;
+    }
+
+    .room-box:hover {
+      background-color: #f8f9fa;
+    }
